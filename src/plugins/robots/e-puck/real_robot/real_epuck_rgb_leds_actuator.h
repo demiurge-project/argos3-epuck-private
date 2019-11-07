@@ -28,6 +28,12 @@ namespace argos {
 
    private:
 
+     void SetEnableBit(UInt8 un_cntrl_reg);
+
+     void SetMiscReg(UInt8 un_misc_reg);
+
+   private:
+
       TI2CDeviceStream m_tDeviceStream;
 
    };
