@@ -22,7 +22,8 @@ enum LedDriverRegisters {
 CRealEPuckRGBLEDsActuator::CRealEPuckRGBLEDsActuator() {
 
     m_tDeviceStream = OpenDevice(0x32); // device address of LP55231
-
+    WriteRegister(m_tDeviceStream, REG_CNTRL1, 0x40);
+    WriteRegister(m_tDeviceStream, REG_MISC, 0x53);
 }
 
 /****************************************/
@@ -39,16 +40,16 @@ CRealEPuckRGBLEDsActuator::~CRealEPuckRGBLEDsActuator() {
 /****************************************/
 /****************************************/
 
-CRealEPuckRGBLEDsActuator::SetEnableBit(){
-  WriteRegister(m_tDeviceStream, REG_CNTRL1, 0x40);
-}
+// CRealEPuckRGBLEDsActuator::SetEnableBit(){
+//   WriteRegister(m_tDeviceStream, REG_CNTRL1, 0x40);
+// }
 
 /****************************************/
 /****************************************/
 
-CRealEPuckRGBLEDsActuator::SetMiscReg(){
-  WriteRegister(m_tDeviceStream, REG_MISC, 0x53);
-}
+// CRealEPuckRGBLEDsActuator::SetMiscReg(){
+//   WriteRegister(m_tDeviceStream, REG_MISC, 0x53);
+// }
 
 /****************************************/
 /****************************************/
