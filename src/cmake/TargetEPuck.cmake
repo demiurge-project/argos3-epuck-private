@@ -3,19 +3,24 @@
 # $ cmake -DCMAKE_TOOLCHAIN_FILE=TargetEPuck.cmake <other args...>
 #
 
+# Path to host make 
+# set(CMAKE_MAKE_PROGRAM /usr/bin/make)
+
 # The name of the target system
 # 'Linux' here is fine because the target board has a Linux OS on it
 # NOTE: When this variable is set, the variable CMAKE_CROSSCOMPILING
 # is also set automatically by CMake
 set(CMAKE_SYSTEM_NAME Linux)
 
+# Ignores gcc and g++ testing
+#SET (CMAKE_C_COMPILER_WORKS 1)
+#SET (CMAKE_CXX_COMPILER_WORKS 1)
+
 # Full path to C compiler
-set(CMAKE_C_COMPILER 
-/home/salman/arm-unknown-linux-gnueabi/bin/arm-unknown-linux-gnueabi-gcc)
+set(CMAKE_C_COMPILER /home/salman/arm-unknown-linux-gnueabi/bin/arm-unknown-linux-gnueabi-gcc)
 
 # Full path to C++ compr
-set(CMAKE_CXX_COMPILER 
-/home/salman/arm-unknown-linux-gnueabi/bin/arm-unknown-linux-gnueabi-g++)
+set(CMAKE_CXX_COMPILER /home/salman/arm-unknown-linux-gnueabi/bin/arm-unknown-linux-gnueabi-g++)
 
 # Set the root directories for the find_* commands
 # Configure CMake to search for headers and libraries only in those directories
