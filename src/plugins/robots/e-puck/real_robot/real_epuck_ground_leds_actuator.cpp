@@ -1,30 +1,52 @@
 /**
- * @file <argos3/plugins/robot/e-puck/real_robot/real_epuck_rgb_leds_actuator.h>
+ * @file <argos3/plugins/robot/e-puck/real_robot/real_epuck_ground_leds_actuator.h>
  *
- * @author Lorenzo Garattoni - <lgaratto@ulb.ac.be>
+ * @author Muhammad Salman - <Muhammad.Salman@ulb.ac.be>
  */
 
-#include "real_epuck_rgb_leds_actuator.h"
+#include "real_epuck_ground_leds_actuator.h"
 #include <argos3/core/utility/logging/argos_log.h>
 
 namespace argos {
 
 /****************************************/
-/*******************
+/***
+*Ground_leds_actuator is based on I2C controlled LEDs driver IC LP55231
+*http://www.ti.com/lit/ds/symlink/lp55231.pdf
 *********************/
+enum GLEDsRegisters {
+  REG_CNTRL1 = 0,  // Write 64 to this register to enable the chip
+  REG_MISC   = 54,  // Write 83 enable internal clock & charge pump & write auto increment
+  REG_D1_PWM  = 22, // Write UInt8 un_PWM value 0-255 (0% - 100%) to turn on D1 LED
+  REG_D2_PWM  = 23, // Write UInt8 un_PWM value 0-255 (0% - 100%) to turn on D2 LED
+  REG_D3_PWM  = 24, // Write UInt8 un_PWM value 0-255 (0% - 100%) to turn on D3 LED
+  REG_D4_PWM  = 25, // Write UInt8 un_PWM value 0-255 (0% - 100%) to turn on D4 LED
+  REG_D5_PWM  = 26, // Write UInt8 un_PWM value 0-255 (0% - 100%) to turn on D5 LED
+  REG_D6_PWM  = 27, // Write UInt8 un_PWM value 0-255 (0% - 100%) to turn on D6 LED
+  REG_D7_PWM  = 28, // Write UInt8 un_PWM value 0-255 (0% - 100%) to turn on D7 LED
+  REG_D8_PWM  = 29, // Write UInt8 un_PWM value 0-255 (0% - 100%) to turn on D8 LED
+  REG_D9_PWM  = 30, // Write UInt8 un_PWM value 0-255 (0% - 100%) to turn on D9 LED
+  REG_D9_OUTPUT_CONTROL = 4, //
+  REG_D1TOD0_OUTPUT_CONTROL = 5, //
+  REG_RESET = 61;   // Write 255 to reset the LED driver
+};
 
-CRealEPuckRGBLEDsActuator::CRealEPuckRGBLEDsActuator() {
+enum DriverParameters{
+  DRIVER_PWM = 125 // @param DRIVER_PWM Can be modified to set the brightness [0 - 255]
+ }
+
+
+CRealEPuckGroundLEDsActuator::CRealEPuckGroundLEDsActuator() {
 
     m_tDeviceStream = OpenDevice(0x32);
-    WriteRegister(m_tDeviceStream,0,64); // initialize
-    WriteRegister(m_tDeviceStream,54,83); // misc reg
+    Init_LED_Driver();
 
 }
 
 /****************************************/
 /****************************************/
 
-CRealEPuckRGBLEDsActuator::~CRealEPuckRGBLEDsActuator() {
+CRealEPuckGroundLEDsActuator::~CRealEPuckGroundLEDsActuator() {
 
     SetColors(CColor::BLACK);
     SendData();
@@ -34,60 +56,40 @@ CRealEPuckRGBLEDsActuator::~CRealEPuckRGBLEDsActuator() {
 
 /****************************************/
 /****************************************/
+ void CRealEPuckGroundLEDsActuator::Init_LED_Driver(){
 
-void CRealEPuckRGBLEDsActuator::SendData() {
-
-    // SInt8 nData[9];
-    // nData[0] = m_tLEDSettings[2].GetRed();
-    // nData[1] = m_tLEDSettings[2].GetGreen();
-    // nData[2] = m_tLEDSettings[2].GetBlue();
-    // nData[3] = m_tLEDSettings[1].GetRed();
-    // nData[4] = m_tLEDSettings[1].GetGreen();
-    // nData[5] = m_tLEDSettings[1].GetBlue();
-    // nData[6] = m_tLEDSettings[0].GetRed();
-    // nData[7] = m_tLEDSettings[0].GetGreen();
-    // nData[8] = m_tLEDSettings[0].GetBlue();
-    // WriteData(m_tDeviceStream, nData, 9);
-
-    // SInt8 nData[21];
-    // nData[0] = 0; //0x00; //REG_CNTRL1
-    // nData[1] = 64; //0x40;
-    // nData[2] = 54; //0x36; //MIsc_reg
-    // nData[3] = 83; //0x53;
-    // nData[4] = 22; //0x16; //REG_D1_PWM
-    // nData[5] = 100; //100; //pwm
-    // nData[6] = 0x17; //REG_D2_PWM
-    // nData[7] = 100; //pwm
-    // nData[8] = 0x18; //REG_D3_PWM
-    // nData[9] = 100; //pwm
-    // nData[10] = 0x19; //REG_D4_PWM
-    // nData[11] = 100; //pwm
-    // nData[12] = 0x1a; //REG_D5_PWM
-    // nData[13] = 100; //pwm
-    // nData[14] = 0x1b; //REG_D6_PWM
-    // nData[15] = 100; //pwm
-    // nData[16] = 0x1c; //REG_D7_PWM
-    // nData[17] = 100; //pwm
-    // nData[18] = 0x1d; //REG_D8_PWM
-    // nData[19] = 100; //pwm
-    // nData[20] = 0x1e; //REG_D9_PWM
-    // nData[21] = 100; //pwm
-    // WriteData(m_tDeviceStream, nData, 5);
-
-    WriteRegister(m_tDeviceStream,22,0);
-
-    WriteRegister(m_tDeviceStream,23,0);
-
-    WriteRegister(m_tDeviceStream,24,0);
-
-    WriteRegister(m_tDeviceStream,28,0);
-
-    //WriteRegister(m_tDeviceStream,26,100);
-
-    //WriteRegister(m_tDeviceStream,27,100);
+   WriteRegister(m_tDeviceStream,REG_CNTRL1,64); // initialize
+   WriteRegister(m_tDeviceStream,REG_MISC,83); // misc reg
+/***
+* Disable all outputs of the Driver
+***/
+   WriteRegister(m_tDeviceStream,REG_D9_OUTPUT_CONTROL,0);
+   WriteRegister(m_tDeviceStream,REG_D1TOD0_OUTPUT_CONTROL,0);
+/***
+* Set PWM of each LED
+***/
+   WriteRegister(m_tDeviceStream,REG_D1_PWM,DRIVER_PWM);
+   WriteRegister(m_tDeviceStream,REG_D2_PWM,DRIVER_PWM);
+   WriteRegister(m_tDeviceStream,REG_D3_PWM,DRIVER_PWM);
+   WriteRegister(m_tDeviceStream,REG_D4_PWM,DRIVER_PWM);
+   WriteRegister(m_tDeviceStream,REG_D5_PWM,DRIVER_PWM);
+   WriteRegister(m_tDeviceStream,REG_D6_PWM,DRIVER_PWM);
+   WriteRegister(m_tDeviceStream,REG_D7_PWM,DRIVER_PWM);
+   WriteRegister(m_tDeviceStream,REG_D8_PWM,DRIVER_PWM);
+   WriteRegister(m_tDeviceStream,REG_D9_PWM,DRIVER_PWM);
 
 
-}
+ }
+
+/****************************************/
+/****************************************/
+void CRealEPuckGroundLEDsActuator::SendData() {
+
+    WriteRegister(m_tDeviceStream,REG_D1TOD0_OUTPUT_CONTROL,0);
+
+    WriteRegister(m_tDeviceStream,REG_D9_OUTPUT_CONTROL,0);
+
+  }
 
 /****************************************/
 /****************************************/

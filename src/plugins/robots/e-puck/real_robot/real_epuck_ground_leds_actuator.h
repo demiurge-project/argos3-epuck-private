@@ -1,30 +1,38 @@
 /**
- * @file <argos3/plugins/robot/e-puck/real_robot/real_epuck_rgb_leds_actuator.h>
+ * @file <argos3/plugins/robot/e-puck/real_robot/real_epuck_ground_leds_actuator.h>
  *
- * @author Lorenzo Garattoni - <lgaratto@ulb.ac.be>
+ * @author Muhammad Salman - <Muhammad.Salman@ulb.ac.be>
  */
 
-#ifndef REAL_EPUCK_RGB_LEDS_ACTUATOR_H
-#define REAL_EPUCK_RGB_LEDS_ACTUATOR_H
+#ifndef REAL_EPUCK_GROUND_LEDS_ACTUATOR_H
+#define REAL_EPUCK_GROUND_LEDS_ACTUATOR_H
 
 namespace argos {
-   class CRealEPuckRGBLEDsActuator;
+   class CRealEPuckGroundLEDsActuator;
 }
 
-#include <argos3/plugins/robots/e-puck/control_interface/ci_epuck_rgb_leds_actuator.h>
+#include <argos3/plugins/robots/e-puck/control_interface/ci_epuck_ground_leds_actuator.h>
 #include <argos3/plugins/robots/e-puck/real_robot/real_epuck_i2c_actuator.h>
 
 namespace argos {
 
-   class CRealEPuckRGBLEDsActuator : virtual public CCI_EPuckRGBLEDsActuator,
+   class CRealEPuckGroundLEDsActuator : virtual public CCI_EPuckGroundLEDsActuator,
                                      virtual public CRealEPuckI2CActuator {
 
    public:
 
-      CRealEPuckRGBLEDsActuator();
-      virtual ~CRealEPuckRGBLEDsActuator();
+      CRealEPuckGroundLEDsActuator();
+      virtual ~CRealEPuckGroundLEDsActuator();
 
       virtual void SendData();
+
+      virtual void Init_LED_Driver();
+
+      virtual void SwitchLED(size_t un_led_number, bool b_switched_on);
+
+      virtual void SwitchLEDs(size_t un_number_of_leds);
+
+      virtual void SwitchAll(bool b_switch_all);
 
    private:
 

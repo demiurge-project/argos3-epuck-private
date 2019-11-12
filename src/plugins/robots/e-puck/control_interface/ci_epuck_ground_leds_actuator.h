@@ -13,7 +13,7 @@
  *   e                       g
  *   f                       h
  *   t                       t
- *       1 2 3 4 5 6 7 8 9
+ *       8 6 4 2 1 3 5 7 9
  *
  *              back
  *
@@ -43,23 +43,17 @@ namespace argos {
       virtual ~CCI_EPuckGroundLEDsActuator() {}
 
       /**
-      * Initialize the Ground LEDs board
-      **/
-
-      virtual void Init();
-
-      /**
        * Switch a single LED.
        * @param un_led_number The number of the LED [1-9]
        * @param b_switched_on <tt>true</tt> to switch the LED on; <tt>false</tt> to switch it off.
        */
-      virtual void SetLED(size_t un_led_number, bool b_switched_on);
+      virtual void SwitchLED(size_t un_led_number, bool b_switched_on);
 
       /**
        * Switch on a number of LEDs.
        * @param un_number_of_leds The number of LEDs required to switch on.
        */
-      virtual void SetLEDs(size_t un_number_of_leds);
+      virtual void SwitchLEDs(size_t un_number_of_leds);
 
       /**
        * Switch on/off all LEDs.
