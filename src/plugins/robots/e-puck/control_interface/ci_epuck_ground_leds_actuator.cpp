@@ -23,13 +23,13 @@ namespace argos {
      if(b_switched_on) {
        if(un_led_number - 1 <= 7){
         m_unLEDSettingsD1ToD8 |= (1 << (un_led_number-1));
-      }if else(un_led_number - 1 <= 8){
-        m_unLEDSettingsD9 |= (1 << 1);
+      }if else(un_led_number - 1 = 8){
+        m_unLEDSettingsD9 |= (1 << 0);
       }
      } else {
        if(un_led_number - 1 <= 7){
         m_unLEDSettingsD1ToD8 &= ~(1 << (un_led_number-1));
-      }if else(un_led_number - 1 <= 8){
+      }if else(un_led_number - 1 = 8){
         m_unLEDSettingsD9 &= ~(1 << 1);
       }
     }
@@ -41,11 +41,14 @@ namespace argos {
 
    void CCI_EPuckGroundLEDsActuator::SwitchLEDs(size_t un_number_of_leds) {
 
+     m_unLEDSettingsD1ToD8 = 0;
+     m_unLEDSettingsD9 = 0;
+
      for(size_t i=0; i<=un_number_of_leds-1; i++){
        if(un_led_number - 1 <= 7){
         m_unLEDSettingsD1ToD8 |= (1 << i);
-      }if else(un_led_number - 1 <= 8){
-        m_unLEDSettingsD9 |= (1 << 1);
+      }if else(un_led_number - 1 = 8){
+        m_unLEDSettingsD9 |= (1 << 0);
       }
      }
    }
