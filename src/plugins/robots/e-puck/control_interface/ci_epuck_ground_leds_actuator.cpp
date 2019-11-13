@@ -67,4 +67,14 @@ namespace argos {
    /****************************************/
    /****************************************/
 
+   UInt8 un_LED_Settings_D1ToD8 CCI_EPuckGroundLEDsActuator::GetD1ToD8(){
+     return m_unLEDSettingsD1ToD8
+   }
+
+   /****************************************/
+   /****************************************/
+
+   UInt8 un_LED_Settings_D9 CCI_EPuckGroundLEDsActuator::GetD9(){
+     return m_unLEDSettingsD9
+   }
 }

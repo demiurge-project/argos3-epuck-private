@@ -28,12 +28,6 @@ namespace argos {
 
       virtual void Init_LED_Driver();
 
-      virtual void SwitchLED(size_t un_led_number, bool b_switched_on);
-
-      virtual void SwitchLEDs(size_t un_number_of_leds);
-
-      virtual void SwitchAll(bool b_switch_all);
-
    private:
 
       TI2CDeviceStream m_tDeviceStream;

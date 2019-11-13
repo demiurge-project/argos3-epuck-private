@@ -27,7 +27,7 @@ enum GLEDsRegisters {
   REG_D8_PWM  = 29, // Write UInt8 un_PWM value 0-255 (0% - 100%) to turn on D8 LED
   REG_D9_PWM  = 30, // Write UInt8 un_PWM value 0-255 (0% - 100%) to turn on D9 LED
   REG_D9_OUTPUT_CONTROL = 4, //
-  REG_D1TOD0_OUTPUT_CONTROL = 5, //
+  REG_D1TOD8_OUTPUT_CONTROL = 5, //
   REG_RESET = 61;   // Write 255 to reset the LED driver
 };
 
@@ -48,7 +48,7 @@ CRealEPuckGroundLEDsActuator::CRealEPuckGroundLEDsActuator() {
 
 CRealEPuckGroundLEDsActuator::~CRealEPuckGroundLEDsActuator() {
 
-    SetColors(CColor::BLACK);
+    SwitchAll(false);
     SendData();
     CloseDevice(m_tDeviceStream);
 
@@ -64,7 +64,7 @@ CRealEPuckGroundLEDsActuator::~CRealEPuckGroundLEDsActuator() {
 * Disable all outputs of the Driver
 ***/
    WriteRegister(m_tDeviceStream,REG_D9_OUTPUT_CONTROL,0);
-   WriteRegister(m_tDeviceStream,REG_D1TOD0_OUTPUT_CONTROL,0);
+   WriteRegister(m_tDeviceStream,REG_D1TOD8_OUTPUT_CONTROL,0);
 /***
 * Set PWM of each LED
 ***/
@@ -77,18 +77,15 @@ CRealEPuckGroundLEDsActuator::~CRealEPuckGroundLEDsActuator() {
    WriteRegister(m_tDeviceStream,REG_D7_PWM,DRIVER_PWM);
    WriteRegister(m_tDeviceStream,REG_D8_PWM,DRIVER_PWM);
    WriteRegister(m_tDeviceStream,REG_D9_PWM,DRIVER_PWM);
-
-
  }
 
 /****************************************/
 /****************************************/
 void CRealEPuckGroundLEDsActuator::SendData() {
 
-    WriteRegister(m_tDeviceStream,REG_D1TOD0_OUTPUT_CONTROL,0);
+    WriteRegister(m_tDeviceStream,REG_D1TOD8_OUTPUT_CONTROL,GetD1ToD8());
 
-    WriteRegister(m_tDeviceStream,REG_D9_OUTPUT_CONTROL,0);
-
+    WriteRegister(m_tDeviceStream,REG_D9_OUTPUT_CONTROL,GetD9());
   }
 
 /****************************************/

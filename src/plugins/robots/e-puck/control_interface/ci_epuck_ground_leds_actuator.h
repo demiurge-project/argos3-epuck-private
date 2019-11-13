@@ -61,6 +61,10 @@ namespace argos {
        */
       virtual void SwitchAll(bool b_switch_all);
 
+      UInt8 GetD1ToD8();
+
+      UInt8 GetD9();
+
 
    protected:
 
