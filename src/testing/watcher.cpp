@@ -28,9 +28,11 @@ CWatcherController::CWatcherController() :
     m_sLeftWheelSpeed(0),
     m_sRightWheelSpeed(0),
     m_nControlStep(0),
+    m_unNumberOfLeds(0),          // no. of leds to switch on
     m_pcWheelsActuator(NULL),
     m_pcLEDsActuator(NULL),
     m_pcRGBLEDsActuator(NULL),
+    m_pcGroundLEDsActuator(NULL), //      ground leds
     m_pcRABActuator(NULL),
     m_pcIRComActuator(NULL),
     m_pcProximitySensor(NULL),
@@ -65,6 +67,7 @@ void CWatcherController::ParseParams(TConfigurationNode& t_node) {
         GetNodeAttributeOrDefault(t_node, "data_size", m_nDataSize, m_nDataSize);
         GetNodeAttributeOrDefault(t_node, "distance", m_nDistance, m_nDistance);
         GetNodeAttributeOrDefault(t_node, "run", m_nRun, m_nRun);
+        GetNodeAttributeOrDefault(t_node, "no_of_leds", m_unNumberOfLeds, m_unNumberOfLeds);
         if (filename != "") {
             LOG << "[INFO]\tfilename: " << filename << std::endl;
             LOG_FILE_INIT(filename.c_str());
@@ -98,6 +101,9 @@ void CWatcherController::Init(TConfigurationNode& t_node) {
     } catch (CARGoSException ex) {}
     try {
         m_pcIRComActuator = GetActuator<CCI_EPuckIRComActuator>("epuck_ircom");
+    } catch (CARGoSException ex) {}
+    try {
+        m_pcGroundLEDsActuator = GetActuator<CCI_EPuckGroundLEDsActuator>("epuck_ground_leds");
     } catch (CARGoSException ex) {}
     /* sensors */
     try {
@@ -145,6 +151,11 @@ void CWatcherController::ControlStep() {
         m_pcRGBLEDsActuator->SetColor(m_nControlStep % 3, CColor::BLUE);
         /* puts the previous RGB LED black */
         m_pcRGBLEDsActuator->SetColor((m_nControlStep - 1) % 3, CColor::BLACK);
+    }
+    /* Ground leds*/
+    if (m_pcGroundLEDsActuator != NULL) {
+        /* turn-on the given number of LEDs */
+        m_pcGroundLEDsActuator->SwitchLEDs(m_unNumberOfLeds);
     }
     if (m_pcRABActuator != NULL) {
         UInt8 data[4];

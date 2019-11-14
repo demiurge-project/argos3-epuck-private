@@ -250,6 +250,10 @@ CCI_Actuator* CRealEPuck::InsertActuator(const std::string& str_actuator_name) {
         CRealEPuckVirtualCamrabActuator* pcVirtualCamrabActuator = CreateActuator<CRealEPuckVirtualCamrabActuator>(str_actuator_name);
         m_vecI2CActuators.push_back(pcVirtualCamrabActuator);
         return pcVirtualCamrabActuator;
+    } else if (str_actuator_name == "epuck_ground_leds") {     //@salman
+        CRealEPuckGroundLEDsActuator* pcGroundLEDsActuator = CreateActuator<CRealEPuckGroundLEDsActuator>(str_actuator_name);
+        m_vecI2CActuators.push_back(pcGroundLEDsActuator);
+        return pcGroundLEDsActuator;
     } else if (str_actuator_name == "epuck_ircom") {
         CRealEPuckIRComActuator* pcIRComActuator = CreateActuator<CRealEPuckIRComActuator>(str_actuator_name);
         pcIRComActuator->SetState(m_sActuatorState);
@@ -302,7 +306,7 @@ CCI_Sensor* CRealEPuck::InsertSensor(const std::string& str_sensor_name) {
         return pcMicroSensor;
     } else if (str_sensor_name == "epuck_omnidirectional_camera") {
         m_pcOmnidirectionalCameraSensor = CreateSensor<CRealEPuckOmnidirectionalCameraSensor>(str_sensor_name);
-        return m_pcOmnidirectionalCameraSensor;    
+        return m_pcOmnidirectionalCameraSensor;
     } else if (str_sensor_name == "epuck_virtual_camrab") {
         CRealEPuckVirtualCamrabSensor* pcVirtualCamrabSensor = CreateSensor<CRealEPuckVirtualCamrabSensor>(str_sensor_name);
         m_vecI2CSensors.push_back(pcVirtualCamrabSensor);

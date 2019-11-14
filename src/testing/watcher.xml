@@ -18,7 +18,8 @@
                         library="build_linux/testing/libwatcher.so">
       <actuators>
         <epuck_base_leds implementation="default" medium="leds"/>
-        <!--epuck_rgb_leds implementation="default" medium="leds"/-->
+        <!-- epuck_rgb_leds implementation="default" medium="leds"/ -->
+        <epuck_ground_leds implementation="default" medium="leds"/>
         <epuck_wheels implementation="default"/>
         <!--epuck_range_and_bearing implementation="medium" medium="rab" delay="20000" data_size="3"/-->
         <!-- <epuck_ircom implementation="medium" medium="ircom" show_rays="true"/> -->
@@ -31,7 +32,7 @@
         <epuck_omnidirectional_camera implementation="default" low_level_config="/home/root/lorenzo/low_level_configuration/omnidirectional_camera_sensor.xml"/>
         <!-- <epuck_ircom implementation="medium" medium="ircom" show_rays="false"/> -->
       </sensors>
-      <params LWS='0' RWS='0'/>
+      <params LWS='0' RWS='0' no_of_leds='3'/>
     </watcher_controller>
   </controllers>
 

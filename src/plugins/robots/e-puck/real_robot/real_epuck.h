@@ -32,6 +32,7 @@ namespace argos {
 #include <argos3/plugins/robots/e-puck/real_robot/real_epuck_omnidirectional_camera_sensor.h>
 #include <argos3/plugins/robots/e-puck/real_robot/real_epuck_virtual_camrab_sensor.h>   //@antoine
 #include <argos3/plugins/robots/e-puck/real_robot/real_epuck_virtual_camrab_actuator.h>   //@antoine
+#include <argos3/plugins/robots/e-puck/real_robot/real_epuck_ground_leds_actuator.h>  //@salman
 #include <argos3/core/control_interface/ci_controller.h>
 #include <argos3/core/utility/datatypes/datatypes.h>
 #include <argos3/core/utility/logging/argos_log.h>

@@ -28,12 +28,12 @@ enum GLEDsRegisters {
   REG_D9_PWM  = 30, // Write UInt8 un_PWM value 0-255 (0% - 100%) to turn on D9 LED
   REG_D9_OUTPUT_CONTROL = 4, //
   REG_D1TOD8_OUTPUT_CONTROL = 5, //
-  REG_RESET = 61;   // Write 255 to reset the LED driver
+  REG_RESET = 61   // Write 255 to reset the LED driver
 };
 
 enum DriverParameters{
   DRIVER_PWM = 125 // @param DRIVER_PWM Can be modified to set the brightness [0 - 255]
- }
+};
 
 
 CRealEPuckGroundLEDsActuator::CRealEPuckGroundLEDsActuator() {
