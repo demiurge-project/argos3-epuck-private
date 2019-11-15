@@ -44,13 +44,72 @@ namespace argos {
      m_unLEDSettingsD1ToD8 = 0;
      m_unLEDSettingsD9 = 0;
 
-     for(size_t i=0; i<=un_number_of_leds-1; i++){
-       if(un_number_of_leds - 1 <= 7){
-        m_unLEDSettingsD1ToD8 |= (1 << i);
-      }else if(un_number_of_leds - 1 == 8){
-        m_unLEDSettingsD9 |= (1 << 0);
-      }
+     switch (un_number_of_leds) {
+       case 0:{
+         m_unLEDSettingsD1ToD8 = 0;
+         m_unLEDSettingsD9 = 0;
+         break;
+       }
+       case 1:{
+         m_unLEDSettingsD1ToD8 = 1;  // (0 0 0 0 0 0 0 1)
+         m_unLEDSettingsD9 = 0;      // (x x x x x x x 0)
+         break;
+       }
+       case 2:{
+         m_unLEDSettingsD1ToD8 = 3; // (0 0 0 0 0 0 1 1)
+         m_unLEDSettingsD9 = 0;     // (x x x x x x x 0)
+         break;
+       }
+       case 3:{
+         m_unLEDSettingsD1ToD8 = 7; // (0 0 0 0 0 1 1 1)
+         m_unLEDSettingsD9 = 0;     // (x x x x x x x 0)
+         break;
+       }
+       case 4:{
+         m_unLEDSettingsD1ToD8 = 15; // (0 0 0 0 1 1 1 1)
+         m_unLEDSettingsD9 = 0;      // (x x x x x x x 0)
+         break;
+       }
+       case 5:{
+         m_unLEDSettingsD1ToD8 = 31; // (0 0 0 1 1 1 1 1)
+         m_unLEDSettingsD9 = 0;      // (x x x x x x x 0)
+         break;
+       }
+       case 6:{
+         m_unLEDSettingsD1ToD8 = 63; // (0 0 1 1 1 1 1 1)
+         m_unLEDSettingsD9 = 0;      // (x x x x x x x 0)
+         break;
+       }
+       case 7:{
+         m_unLEDSettingsD1ToD8 = 127; // (0 1 1 1 1 1 1 1)
+         m_unLEDSettingsD9 = 0;       // (x x x x x x x 0)
+         break;
+       }
+       case 8:{
+         m_unLEDSettingsD1ToD8 = 255; // (1 1 1 1 1 1 1 1)
+         m_unLEDSettingsD9 = 0;       // (x x x x x x x 0)
+         break;
+       }
+       case 9:{
+         m_unLEDSettingsD1ToD8 = 255; // (1 1 1 1 1 1 1 1)
+         m_unLEDSettingsD9 = 255;       // (1 1 1 1 1 1 1 1)
+         break;
+       }
+       default:{
+         m_unLEDSettingsD1ToD8 = 170; // (1 0 1 0 1 0 1 0)
+         m_unLEDSettingsD9 = 0;     // (x x x x x x x 0)
+       }
+
+
      }
+
+     // for(size_t i=0; i<=un_number_of_leds-1; i++){
+     //   if(un_number_of_leds - 1 <= 7){
+     //    m_unLEDSettingsD1ToD8 |= (1 << i);
+     //  }else if(un_number_of_leds - 1 == 8){
+     //    m_unLEDSettingsD9 |= (1 << 0);
+     //  }
+     // }
    }
 
    /****************************************/

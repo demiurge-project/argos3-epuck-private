@@ -14,25 +14,94 @@
   <!-- *************** -->
   <controllers>
     <!-- C++ controller -->
-    <watcher_controller id="watcher"
+    <watcher_controller id="1_led"
                         library="build_linux/testing/libwatcher.so">
       <actuators>
-        <epuck_base_leds implementation="default" medium="leds"/>
-        <!-- epuck_rgb_leds implementation="default" medium="leds"/ -->
         <epuck_ground_leds implementation="default" medium="leds"/>
-        <epuck_wheels implementation="default"/>
-        <!--epuck_range_and_bearing implementation="medium" medium="rab" delay="20000" data_size="3"/-->
-        <!-- <epuck_ircom implementation="medium" medium="ircom" show_rays="true"/> -->
       </actuators>
       <sensors>
-        <epuck_proximity implementation="default" show_rays="false"/>
-        <!--epuck_light implementation="default" show_rays="false"/-->
-        <!--epuck_ground implementation="rot_z_only" show_rays="false"/-->
-        <!--epuck_range_and_bearing implementation="medium" medium="rab" show_rays="false" data_size="3"/-->
-        <epuck_omnidirectional_camera implementation="default" low_level_config="/home/root/lorenzo/low_level_configuration/omnidirectional_camera_sensor.xml"/>
-        <!-- <epuck_ircom implementation="medium" medium="ircom" show_rays="false"/> -->
       </sensors>
-      <params LWS='0' RWS='0' no_of_leds='3'/>
+      <params no_of_leds='1'/>
+    </watcher_controller>
+
+    <watcher_controller id="2_leds"
+                        library="build_linux/testing/libwatcher.so">
+      <actuators>
+        <epuck_ground_leds implementation="default" medium="leds"/>
+      </actuators>
+      <sensors>
+      </sensors>
+      <params no_of_leds='2'/>
+    </watcher_controller>
+
+    <watcher_controller id="3_leds"
+                        library="build_linux/testing/libwatcher.so">
+      <actuators>
+        <epuck_ground_leds implementation="default" medium="leds"/>
+      </actuators>
+      <sensors>
+      </sensors>
+      <params no_of_leds='3'/>
+    </watcher_controller>
+
+    <watcher_controller id="4_leds"
+                        library="build_linux/testing/libwatcher.so">
+      <actuators>
+        <epuck_ground_leds implementation="default" medium="leds"/>
+      </actuators>
+      <sensors>
+      </sensors>
+      <params no_of_leds='4'/>
+    </watcher_controller>
+
+    <watcher_controller id="5_leds"
+                        library="build_linux/testing/libwatcher.so">
+      <actuators>
+        <epuck_ground_leds implementation="default" medium="leds"/>
+      </actuators>
+      <sensors>
+      </sensors>
+      <params no_of_leds='5'/>
+    </watcher_controller>
+
+    <watcher_controller id="6_leds"
+                        library="build_linux/testing/libwatcher.so">
+      <actuators>
+        <epuck_ground_leds implementation="default" medium="leds"/>
+      </actuators>
+      <sensors>
+      </sensors>
+      <params no_of_leds='6'/>
+    </watcher_controller>
+
+    <watcher_controller id="7_leds"
+                        library="build_linux/testing/libwatcher.so">
+      <actuators>
+        <epuck_ground_leds implementation="default" medium="leds"/>
+      </actuators>
+      <sensors>
+      </sensors>
+      <params no_of_leds='7'/>
+    </watcher_controller>
+
+    <watcher_controller id="8_leds"
+                        library="build_linux/testing/libwatcher.so">
+      <actuators>
+        <epuck_ground_leds implementation="default" medium="leds"/>
+      </actuators>
+      <sensors>
+      </sensors>
+      <params no_of_leds='8'/>
+    </watcher_controller>
+
+    <watcher_controller id="9_leds"
+                        library="build_linux/testing/libwatcher.so">
+      <actuators>
+        <epuck_ground_leds implementation="default" medium="leds"/>
+      </actuators>
+      <sensors>
+      </sensors>
+      <params no_of_leds='9'/>
     </watcher_controller>
   </controllers>
 

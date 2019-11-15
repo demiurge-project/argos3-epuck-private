@@ -32,7 +32,7 @@ enum GLEDsRegisters {
 };
 
 enum DriverParameters{
-  DRIVER_PWM = 125 // @param DRIVER_PWM Can be modified to set the brightness [0 - 255]
+  DRIVER_PWM = 150 // @param DRIVER_PWM Can be modified to set the brightness [0 - 255]
 };
 
 
