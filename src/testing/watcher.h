@@ -6,7 +6,7 @@
 #include <argos3/plugins/robots/e-puck/control_interface/ci_epuck_wheels_actuator.h>
 #include <argos3/plugins/robots/e-puck/control_interface/ci_epuck_base_leds_actuator.h>
 #include <argos3/plugins/robots/e-puck/control_interface/ci_epuck_rgb_leds_actuator.h>
-#include <argos3/plugins/robots/e-puck/control_interface/ci_epuck_ground_leds_actuator.h> /@salman
+#include <argos3/plugins/robots/e-puck/control_interface/ci_epuck_ground_leds_actuator.h>
 #include <argos3/plugins/robots/e-puck/control_interface/ci_epuck_range_and_bearing_actuator.h>
 #include <argos3/plugins/robots/e-puck/control_interface/ci_epuck_ircom_actuator.h>
 
@@ -41,14 +41,15 @@ namespace argos {
       UInt32 m_nDistance;
       UInt32 m_nRun;
 
-      size_t m_unNumberOfLeds;
-
       std::string filename;
 
       SInt32 m_sLeftWheelSpeed;
       SInt32 m_sRightWheelSpeed;
 
       UInt32 m_nControlStep;
+
+      size_t m_unNumberOfGroundLeds;
+      UInt8  m_unPWMGroundLED;
 
       CCI_EPuckWheelsActuator* m_pcWheelsActuator;
       CCI_EPuckBaseLEDsActuator* m_pcLEDsActuator;

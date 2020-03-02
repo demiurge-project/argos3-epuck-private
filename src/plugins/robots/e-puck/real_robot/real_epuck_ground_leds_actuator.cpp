@@ -32,7 +32,7 @@ enum GLEDsRegisters {
 };
 
 enum DriverParameters{
-  DRIVER_PWM = 230 // @param DRIVER_PWM Can be modified to set the brightness [0 - 255]
+  DRIVER_PWM = 220 // @param DRIVER_PWM Can be modified to set the brightness [0 - 255]
 };
 
 
@@ -68,15 +68,22 @@ CRealEPuckGroundLEDsActuator::~CRealEPuckGroundLEDsActuator() {
 /***
 * Set PWM of each LED
 ***/
-   WriteRegister(m_tDeviceStream,REG_D1_PWM,DRIVER_PWM);
-   WriteRegister(m_tDeviceStream,REG_D2_PWM,DRIVER_PWM);
-   WriteRegister(m_tDeviceStream,REG_D3_PWM,DRIVER_PWM);
-   WriteRegister(m_tDeviceStream,REG_D4_PWM,DRIVER_PWM);
-   WriteRegister(m_tDeviceStream,REG_D5_PWM,DRIVER_PWM);
-   WriteRegister(m_tDeviceStream,REG_D6_PWM,DRIVER_PWM);
-   WriteRegister(m_tDeviceStream,REG_D7_PWM,DRIVER_PWM);
-   WriteRegister(m_tDeviceStream,REG_D8_PWM,DRIVER_PWM);
-   WriteRegister(m_tDeviceStream,REG_D9_PWM,DRIVER_PWM);
+  InitPWM(DRIVER_PWM);
+ }
+
+ /****************************************/
+ /****************************************/
+
+ void CRealEPuckGroundLEDsActuator::InitPWM(UInt8 un_PWM_Ground_LED) {
+   WriteRegister(m_tDeviceStream,REG_D1_PWM,un_PWM_Ground_LED);
+   WriteRegister(m_tDeviceStream,REG_D2_PWM,un_PWM_Ground_LED);
+   WriteRegister(m_tDeviceStream,REG_D3_PWM,un_PWM_Ground_LED);
+   WriteRegister(m_tDeviceStream,REG_D4_PWM,un_PWM_Ground_LED);
+   WriteRegister(m_tDeviceStream,REG_D5_PWM,un_PWM_Ground_LED);
+   WriteRegister(m_tDeviceStream,REG_D6_PWM,un_PWM_Ground_LED);
+   WriteRegister(m_tDeviceStream,REG_D7_PWM,un_PWM_Ground_LED);
+   WriteRegister(m_tDeviceStream,REG_D8_PWM,un_PWM_Ground_LED);
+   WriteRegister(m_tDeviceStream,REG_D9_PWM,un_PWM_Ground_LED);
  }
 
 /****************************************/
@@ -84,11 +91,15 @@ CRealEPuckGroundLEDsActuator::~CRealEPuckGroundLEDsActuator() {
 void CRealEPuckGroundLEDsActuator::SendData() {
 
     WriteRegister(m_tDeviceStream,REG_D1TOD8_OUTPUT_CONTROL,GetD1ToD8());
-
     WriteRegister(m_tDeviceStream,REG_D9_OUTPUT_CONTROL,GetD9());
   }
 
 /****************************************/
 /****************************************/
+
+void CRealEPuckGroundLEDsActuator::SetPWM(UInt8 un_PWM_Ground_LED){
+  CCI_EPuckGroundLEDsActuator::SetPWM(un_PWM_Ground_LED);
+  InitPWM(un_PWM_Ground_LED);
+}
 
 }

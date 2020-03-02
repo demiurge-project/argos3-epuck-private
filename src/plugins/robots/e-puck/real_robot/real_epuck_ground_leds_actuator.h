@@ -24,9 +24,11 @@ namespace argos {
       CRealEPuckGroundLEDsActuator();
       virtual ~CRealEPuckGroundLEDsActuator();
 
-      virtual void SendData();
-
       virtual void Init_LED_Driver();
+      void InitPWM(UInt8 DRIVER_PWM);
+
+      virtual void SendData();
+      virtual void SetPWM(UInt8 un_PWM_Ground_LED);
 
    private:
 

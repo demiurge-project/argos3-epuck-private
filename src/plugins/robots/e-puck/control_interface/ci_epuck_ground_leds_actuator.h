@@ -65,6 +65,12 @@ namespace argos {
 
       UInt8 GetD9();
 
+      virtual void SetPWM(UInt8 un_PWM_Ground_LED);
+
+      UInt8 GetPWM();
+
+
+
 
    protected:
 
@@ -77,6 +83,12 @@ namespace argos {
       * State of the 9th LED (8 bits, LSB for 9th LED, 0 for off, 1 for on)
       */
      UInt8 m_unLEDSettingsD9;
+
+     /**
+      * PWM value for ground LEDs
+      */
+     UInt8 m_unPWMGroundLED;
+
    };
 
 }

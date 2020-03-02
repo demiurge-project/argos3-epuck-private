@@ -14,6 +14,7 @@ namespace argos {
    CCI_EPuckGroundLEDsActuator::CCI_EPuckGroundLEDsActuator() {
      m_unLEDSettingsD1ToD8 = 0;
      m_unLEDSettingsD9 = 0;
+     m_unPWMGroundLED = 0;
    }
 
    /****************************************/
@@ -100,16 +101,8 @@ namespace argos {
          m_unLEDSettingsD9 = 0;     // (x x x x x x x 0)
        }
 
-
      }
 
-     // for(size_t i=0; i<=un_number_of_leds-1; i++){
-     //   if(un_number_of_leds - 1 <= 7){
-     //    m_unLEDSettingsD1ToD8 |= (1 << i);
-     //  }else if(un_number_of_leds - 1 == 8){
-     //    m_unLEDSettingsD9 |= (1 << 0);
-     //  }
-     // }
    }
 
    /****************************************/
@@ -138,5 +131,21 @@ namespace argos {
 
    UInt8 CCI_EPuckGroundLEDsActuator::GetD9(){
      return m_unLEDSettingsD9;
+
    }
+
+   /****************************************/
+   /****************************************/
+
+   void CCI_EPuckGroundLEDsActuator::SetPWM(UInt8 un_PWM_Ground_LED){
+      m_unPWMGroundLED = un_PWM_Ground_LED;
+   }
+
+   /****************************************/
+   /****************************************/
+
+   UInt8 CCI_EPuckGroundLEDsActuator::GetPWM(){
+     return m_unPWMGroundLED;
+   }
+
 }
