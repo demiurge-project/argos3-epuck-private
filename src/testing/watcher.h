@@ -49,7 +49,7 @@ namespace argos {
       UInt32 m_nControlStep;
 
       size_t m_unNumberOfGroundLeds;
-      UInt8  m_unPWMGroundLED;
+      //UInt8  m_unPWMGroundLED;
 
       CCI_EPuckWheelsActuator* m_pcWheelsActuator;
       CCI_EPuckBaseLEDsActuator* m_pcLEDsActuator;

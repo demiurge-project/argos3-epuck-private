@@ -31,15 +31,15 @@ enum GLEDsRegisters {
   REG_RESET = 61   // Write 255 to reset the LED driver
 };
 
-enum DriverParameters{
-  DRIVER_PWM = 220 // @param DRIVER_PWM Can be modified to set the brightness [0 - 255]
-};
+// enum DriverParameters{
+//   DRIVER_PWM = 220 // @param DRIVER_PWM Can be modified to set the brightness [0 - 255]
+// };
 
 
 CRealEPuckGroundLEDsActuator::CRealEPuckGroundLEDsActuator() {
 
     m_tDeviceStream = OpenDevice(0x32);
-    Init_LED_Driver();
+    //Init_LED_Driver();
 
 }
 
@@ -56,25 +56,56 @@ CRealEPuckGroundLEDsActuator::~CRealEPuckGroundLEDsActuator() {
 
 /****************************************/
 /****************************************/
+
+void CRealEPuckGroundLEDsActuator::Init(TConfigurationNode& t_node) {
+    CCI_EPuckGroundLEDsActuator::Init(t_node);
+
+    try {
+        /*
+          * Parse XML
+          */
+        UInt8 m_unPWMGroundLED = 50;
+        /*To understand */
+        GetNodeAttributeOrDefault(t_node, "ground_led_pwm", m_unPWMGroundLED, m_unPWMGroundLED);
+        /*
+          * Initialize led driver
+          */
+
+        Init_LED_Driver();
+
+
+    } catch (CARGoSException& ex) {
+        THROW_ARGOSEXCEPTION_NESTED("Error initializing ground leds actuator", ex);
+
+    }
+
+}
+
+/****************************************/
+/****************************************/
  void CRealEPuckGroundLEDsActuator::Init_LED_Driver(){
 
    WriteRegister(m_tDeviceStream,REG_CNTRL1,64); // initialize
    WriteRegister(m_tDeviceStream,REG_MISC,83); // misc reg
-/***
-* Disable all outputs of the Driver
-***/
+   /***
+   * Disable all outputs of the Driver
+   ***/
    WriteRegister(m_tDeviceStream,REG_D9_OUTPUT_CONTROL,0);
    WriteRegister(m_tDeviceStream,REG_D1TOD8_OUTPUT_CONTROL,0);
-/***
-* Set PWM of each LED
-***/
-  InitPWM(DRIVER_PWM);
+   /***
+   * Set PWM of each LED
+   ***/
+  InitPWM(m_unPWMGroundLED);
+  //LOG << "PWM in Init_LED_Driver" << m_unPWMGroundLED << std::endl;
  }
 
  /****************************************/
  /****************************************/
 
  void CRealEPuckGroundLEDsActuator::InitPWM(UInt8 un_PWM_Ground_LED) {
+
+//LOG << "PWM in InitPWM: " << un_PWM_Ground_LED << std::endl;
+
    WriteRegister(m_tDeviceStream,REG_D1_PWM,un_PWM_Ground_LED);
    WriteRegister(m_tDeviceStream,REG_D2_PWM,un_PWM_Ground_LED);
    WriteRegister(m_tDeviceStream,REG_D3_PWM,un_PWM_Ground_LED);
@@ -97,9 +128,9 @@ void CRealEPuckGroundLEDsActuator::SendData() {
 /****************************************/
 /****************************************/
 
-void CRealEPuckGroundLEDsActuator::SetPWM(UInt8 un_PWM_Ground_LED){
-  CCI_EPuckGroundLEDsActuator::SetPWM(un_PWM_Ground_LED);
-  InitPWM(un_PWM_Ground_LED);
-}
+// void CRealEPuckGroundLEDsActuator::SetPWM(UInt8 un_PWM_Ground_LED){
+//   CCI_EPuckGroundLEDsActuator::SetPWM(un_PWM_Ground_LED);
+//   InitPWM(un_PWM_Ground_LED);
+// }
 
 }

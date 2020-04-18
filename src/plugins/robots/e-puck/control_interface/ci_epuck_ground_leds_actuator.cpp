@@ -14,7 +14,26 @@ namespace argos {
    CCI_EPuckGroundLEDsActuator::CCI_EPuckGroundLEDsActuator() {
      m_unLEDSettingsD1ToD8 = 0;
      m_unLEDSettingsD9 = 0;
-     m_unPWMGroundLED = 0;
+     //m_unPWMGroundLED = 0;
+   }
+
+   /****************************************/
+   /****************************************/
+
+   void CCI_EPuckGroundLEDsActuator::Init(TConfigurationNode& t_tree) {
+      try {
+         /* get the ground leds' PWM value from configuration file */
+
+           GetNodeAttributeOrDefault(t_tree, "ground_led_pwm", m_unPWMGroundLED, 50);
+         if (m_unPWMGroundLED > 255) {
+            LOGERR << "[WARNING] Ground LEDS' PWM value =" << m_unPWMGroundLED
+                   << ", value incorrect, back to default value data_size=" << 50 << std::endl;
+            m_unPWMGroundLED = 50;
+            LOGERR << "PWM in ci_robot Init" << m_unPWMGroundLED << std::endl;
+         }
+      } catch (CARGoSException& ex) {
+         THROW_ARGOSEXCEPTION_NESTED("Error initializing ground leds actuator", ex);
+      }
    }
 
    /****************************************/
@@ -134,18 +153,18 @@ namespace argos {
 
    }
 
-   /****************************************/
-   /****************************************/
-
-   void CCI_EPuckGroundLEDsActuator::SetPWM(UInt8 un_PWM_Ground_LED){
-      m_unPWMGroundLED = un_PWM_Ground_LED;
-   }
-
-   /****************************************/
-   /****************************************/
-
-   UInt8 CCI_EPuckGroundLEDsActuator::GetPWM(){
-     return m_unPWMGroundLED;
-   }
+   // /****************************************/
+   // /****************************************/
+   //
+   // void CCI_EPuckGroundLEDsActuator::SetPWM(UInt8 un_PWM_Ground_LED){
+   //    m_unPWMGroundLED = un_PWM_Ground_LED;
+   // }
+   //
+   // /****************************************/
+   // /****************************************/
+   //
+   // UInt8 CCI_EPuckGroundLEDsActuator::GetPWM(){
+   //   return m_unPWMGroundLED;
+   // }
 
 }

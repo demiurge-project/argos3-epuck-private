@@ -42,6 +42,8 @@ namespace argos {
 
       virtual ~CCI_EPuckGroundLEDsActuator() {}
 
+      virtual void Init(TConfigurationNode& t_tree);
+
       /**
        * Switch a single LED.
        * @param un_led_number The number of the LED [1-9]
@@ -65,9 +67,9 @@ namespace argos {
 
       UInt8 GetD9();
 
-      virtual void SetPWM(UInt8 un_PWM_Ground_LED);
+      //virtual void SetPWM(UInt8 un_PWM_Ground_LED);
 
-      UInt8 GetPWM();
+      //UInt8 GetPWM();
 
 
 

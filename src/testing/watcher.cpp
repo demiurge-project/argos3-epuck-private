@@ -29,7 +29,7 @@ CWatcherController::CWatcherController() :
     m_sRightWheelSpeed(0),
     m_nControlStep(0),
     m_unNumberOfGroundLeds(0),          // no. of leds to switch on
-    m_unPWMGroundLED(0),              // PWM ground LEDs
+    // m_unPWMGroundLED(0),              // PWM ground LEDs
     m_pcWheelsActuator(NULL),
     m_pcLEDsActuator(NULL),
     m_pcRGBLEDsActuator(NULL),
@@ -69,7 +69,7 @@ void CWatcherController::ParseParams(TConfigurationNode& t_node) {
         GetNodeAttributeOrDefault(t_node, "distance", m_nDistance, m_nDistance);
         GetNodeAttributeOrDefault(t_node, "run", m_nRun, m_nRun);
         GetNodeAttributeOrDefault(t_node, "no_of_leds", m_unNumberOfGroundLeds, m_unNumberOfGroundLeds); //ground LEDs
-        GetNodeAttributeOrDefault(t_node, "pwm", m_unPWMGroundLED, m_unPWMGroundLED);
+        // GetNodeAttributeOrDefault(t_node, "pwm", m_unPWMGroundLED, m_unPWMGroundLED);
 
 
         if (filename != "") {
@@ -109,11 +109,11 @@ void CWatcherController::Init(TConfigurationNode& t_node) {
     try {
         m_pcGroundLEDsActuator = GetActuator<CCI_EPuckGroundLEDsActuator>("epuck_ground_leds");
     } catch (CARGoSException ex) {}
-    if (m_pcGroundLEDsActuator != NULL) {
-        /* Set PWM of ground LEDs */
-        m_pcGroundLEDsActuator->SetPWM(m_unPWMGroundLED);
-        //LOG << "PWM " << m_unPWMGroundLED << std::endl;
-    }
+    // if (m_pcGroundLEDsActuator != NULL) {
+    //     /* Set PWM of ground LEDs */
+    //     m_pcGroundLEDsActuator->SetPWM(m_unPWMGroundLED);
+    //     //LOG << "PWM " << m_unPWMGroundLED << std::endl;
+    // }
     /* sensors */
     try {
         m_pcProximitySensor = GetSensor<CCI_EPuckProximitySensor>("epuck_proximity");
