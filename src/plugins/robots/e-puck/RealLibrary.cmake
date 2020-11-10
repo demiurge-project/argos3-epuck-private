@@ -27,6 +27,7 @@ set(ARGOS3_HEADERS_PLUGINS_ROBOTS_EPUCK_REALROBOT
   real_robot/real_epuck_base_leds_actuator.h
   real_robot/real_epuck_ground_leds_actuator.h
   real_robot/real_epuck_rgb_leds_actuator.h
+  real_robot/real_epuck_quad_rgb_leds_actuator.h
   real_robot/real_epuck_range_and_bearing_actuator.h
   real_robot/real_epuck_ircom_actuator.h
   real_robot/real_epuck_virtual_camrab_actuator.h)
@@ -75,6 +76,7 @@ set(ARGOS3_SOURCES_PLUGINS_ROBOTS_EPUCK
   real_robot/real_epuck_base_leds_actuator.cpp
   real_robot/real_epuck_ground_leds_actuator.cpp
   real_robot/real_epuck_rgb_leds_actuator.cpp
+  real_robot/real_epuck_quad_rgb_leds_actuator.cpp
   real_robot/real_epuck_range_and_bearing_actuator.cpp
   real_robot/real_epuck_ircom_actuator.cpp
   real_robot/real_epuck_virtual_camrab_actuator.cpp

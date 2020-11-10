@@ -20,6 +20,7 @@ set(ARGOS3_HEADERS_PLUGINS_ROBOTS_EPUCK_CONTROLINTERFACE
   control_interface/ci_epuck_base_leds_actuator.h
   control_interface/ci_epuck_ground_leds_actuator.h
   control_interface/ci_epuck_rgb_leds_actuator.h
+  control_interface/ci_epuck_quad_rgb_leds_actuator.h
   control_interface/ci_epuck_range_and_bearing_actuator.h
   control_interface/ci_epuck_wheels_actuator.h
   control_interface/ci_epuck_ircom_actuator.h
@@ -45,6 +46,7 @@ set(ARGOS3_SOURCES_PLUGINS_ROBOTS_EPUCK
   control_interface/ci_epuck_base_leds_actuator.cpp
   control_interface/ci_epuck_ground_leds_actuator.cpp
   control_interface/ci_epuck_rgb_leds_actuator.cpp
+  control_interface/ci_epuck_quad_rgb_leds_actuator.cpp
   control_interface/ci_epuck_range_and_bearing_actuator.cpp
   control_interface/ci_epuck_wheels_actuator.cpp
   control_interface/ci_epuck_ircom_actuator.cpp
