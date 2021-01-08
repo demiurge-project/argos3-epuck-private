@@ -39,7 +39,7 @@ const Real CEPuckEntity::BODY_RADIUS                = 0.035f;
  const Real  CEPuckEntity::PROXIMITY_SENSOR_RING_RANGE           = 0.05f;
 
  const CRadians  CEPuckEntity::LED_RING_START_ANGLE   = CRadians((ARGOS_PI / 8.0f) * 0.5f);
- const Real  CEPuckEntity::LED_RING_RADIUS            = CEPuckEntity::BODY_RADIUS + 0.001;
+ const Real  CEPuckEntity::LED_RING_RADIUS            = CEPuckEntity::BODY_RADIUS + 0.01;
  const Real  CEPuckEntity::LED_RING_ELEVATION         = 0.04f;
 
  const Real  CEPuckEntity::RGB_LED_RING_ELEVATION     = 0.0765f;
@@ -102,10 +102,14 @@ CEPuckEntity::CEPuckEntity(const std::string& str_id,
                   LED_RING_START_ANGLE,
                   8,
                   m_pcEmbodiedEntity->GetOriginAnchor());
-      /* RGB LED equipped entity, with LEDS [8-11] */
+      /* RGB LED equipped entity, with LEDS [8-10] */
       m_pcLEDEquippedEntity->AddLED(CVector3( 0.018f,  0.0311769f, RGB_LED_RING_ELEVATION),m_pcEmbodiedEntity->GetOriginAnchor());
       m_pcLEDEquippedEntity->AddLED(CVector3( 0.018f, -0.0311769f, RGB_LED_RING_ELEVATION),m_pcEmbodiedEntity->GetOriginAnchor());
       m_pcLEDEquippedEntity->AddLED(CVector3(-(BODY_RADIUS+0.001f), 0.0f, RGB_LED_RING_ELEVATION),m_pcEmbodiedEntity->GetOriginAnchor());
+      /* UV LED equipped entity, with LEDS [11-13] - Although 9 LEDs, control limited to 3 incremental groups of 3 */
+      m_pcLEDEquippedEntity->AddLED(CVector3(-(BODY_RADIUS+0.005f), 0.0311769f, LED_RING_ELEVATION),m_pcEmbodiedEntity->GetOriginAnchor());
+      m_pcLEDEquippedEntity->AddLED(CVector3(-(BODY_RADIUS+0.005f), 0.0f, LED_RING_ELEVATION),m_pcEmbodiedEntity->GetOriginAnchor());
+      m_pcLEDEquippedEntity->AddLED(CVector3(-(BODY_RADIUS+0.005f), -0.0311769f, LED_RING_ELEVATION),m_pcEmbodiedEntity->GetOriginAnchor());
       /* To improve speed, disable the LED equipped entity
         * It will be enabled only by an LED actuator, if used */
       m_pcLEDEquippedEntity->Disable();
@@ -238,6 +242,10 @@ void CEPuckEntity::Init(TConfigurationNode& t_tree) {
         m_pcLEDEquippedEntity->AddLED(CVector3( 0.018f,  0.0311769f, RGB_LED_RING_ELEVATION),m_pcEmbodiedEntity->GetOriginAnchor());
         m_pcLEDEquippedEntity->AddLED(CVector3( 0.018f, -0.0311769f, RGB_LED_RING_ELEVATION),m_pcEmbodiedEntity->GetOriginAnchor());
         m_pcLEDEquippedEntity->AddLED(CVector3(-(BODY_RADIUS+0.001f), 0.0f, RGB_LED_RING_ELEVATION),m_pcEmbodiedEntity->GetOriginAnchor());
+        /* UV LED equipped entity, with LEDS [11-19] */
+        m_pcLEDEquippedEntity->AddLED(CVector3(0.018f,  0.0311769f, LED_RING_ELEVATION),m_pcEmbodiedEntity->GetOriginAnchor());
+        m_pcLEDEquippedEntity->AddLED(CVector3(0.018f, -0.0311769f, LED_RING_ELEVATION),m_pcEmbodiedEntity->GetOriginAnchor());
+        m_pcLEDEquippedEntity->AddLED(CVector3((BODY_RADIUS+0.005f), 0.0f, LED_RING_ELEVATION),m_pcEmbodiedEntity->GetOriginAnchor());
         /* To improve speed, disable the LED equipped entity
           * It will be enabled only by an LED actuator, if used */
         m_pcLEDEquippedEntity->Disable();

@@ -3,24 +3,19 @@
 # $ cmake -DCMAKE_TOOLCHAIN_FILE=TargetEPuck.cmake <other args...>
 #
 
-# Path to host make 
-# set(CMAKE_MAKE_PROGRAM /usr/bin/make)
-
 # The name of the target system
 # 'Linux' here is fine because the target board has a Linux OS on it
 # NOTE: When this variable is set, the variable CMAKE_CROSSCOMPILING
 # is also set automatically by CMake
 set(CMAKE_SYSTEM_NAME Linux)
 
-# Ignores gcc and g++ testing
-#SET (CMAKE_C_COMPILER_WORKS 1)
-#SET (CMAKE_CXX_COMPILER_WORKS 1)
-
 # Full path to C compiler
-set(CMAKE_C_COMPILER /home/salman/arm-unknown-linux-gnueabi/bin/arm-unknown-linux-gnueabi-gcc)
+set(CMAKE_C_COMPILER 
+/home/salman/arm-unknown-linux-gnueabi/bin/arm-unknown-linux-gnueabi-gcc)
 
 # Full path to C++ compr
-set(CMAKE_CXX_COMPILER /home/salman/arm-unknown-linux-gnueabi/bin/arm-unknown-linux-gnueabi-g++)
+set(CMAKE_CXX_COMPILER 
+/home/salman/arm-unknown-linux-gnueabi/bin/arm-unknown-linux-gnueabi-g++)
 
 # Set the root directories for the find_* commands
 # Configure CMake to search for headers and libraries only in those directories
@@ -48,4 +43,6 @@ set(ARGOS_THREADSAFE_LOG OFF)
 set(ARGOS_USE_DOUBLE OFF)
 
 set(ARGOS_INCLUDE_DIRS /home/salman/arm-unknown-linux-gnueabi/arm-unknown-linux-gnueabi/sysroot/usr/include)
+#set(ARGOS_INCLUDE_DIRS /home/ken/depots/argos3/src /home/ken/depots/argos3/cross_build)
+#set(ARGOS_LIBRARY_DIRS /home/ken/depots/argos3/cross_build/core)
 set(ARGOS_LIBRARY_DIRS /home/salman/arm-unknown-linux-gnueabi/arm-unknown-linux-gnueabi/sysroot/usr/lib/argos3)

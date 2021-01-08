@@ -38,18 +38,18 @@ namespace argos {
 
    public:
 
+      /**
+       * RGB LED settings data type
+       */
+      // typedef std::vector<CColor> TUVLEDSettings;
+
+   public:
+
       CCI_EPuckGroundLEDsActuator();
 
       virtual ~CCI_EPuckGroundLEDsActuator() {}
 
       virtual void Init(TConfigurationNode& t_tree);
-
-      /**
-       * Switch a single LED.
-       * @param un_led_number The number of the LED [1-9]
-       * @param b_switched_on <tt>true</tt> to switch the LED on; <tt>false</tt> to switch it off.
-       */
-      virtual void SwitchLED(size_t un_led_number, bool b_switched_on);
 
       /**
        * Switch on a number of LEDs.
@@ -63,14 +63,29 @@ namespace argos {
        */
       virtual void SwitchAll(bool b_switch_all);
 
+
       UInt8 GetD1ToD8();
 
       UInt8 GetD9();
 
-      //virtual void SetPWM(UInt8 un_PWM_Ground_LED);
-
-      //UInt8 GetPWM();
-
+      // /**
+      //  * Sets the color of a single LED.
+      //  * @param un_led_number The number of the LED [0-2]
+      //  * @param c_color The wanted color.
+      //  */
+      // virtual void SetColor(size_t un_led_number,
+      //                       const CColor& c_color);
+      //
+      // /**
+      //  * Sets the same color for all LEDs.
+      //  * @param c_color The wanted color.
+      //  */
+      // virtual void SetColors(const CColor& c_color);
+      //
+      // /**
+      //  * Sets the colors of all LEDs individually.
+      //  */
+      // virtual void SetColors(const TLEDSettings& c_colors);
 
 
 
@@ -87,9 +102,20 @@ namespace argos {
      UInt8 m_unLEDSettingsD9;
 
      /**
-      * PWM value for ground LEDs
+      * RGB LEDs settings for UV LEDs
       */
-     UInt8 m_unPWMGroundLED;
+     // TLEDSettings m_tUVLEDSettings;
+
+     /**
+     * Number of UV LEDs on
+     **/
+     size_t m_unOnUVLEDs;
+
+     /**
+     * PWM value for ground LEDs
+     */
+    UInt8 m_unPWMGroundLED;
+
 
    };
 

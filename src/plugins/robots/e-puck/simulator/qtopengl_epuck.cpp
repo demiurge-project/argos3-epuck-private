@@ -44,6 +44,16 @@ namespace argos {
    static const Real RGB_LED_UPPER_RING_INNER_RADIUS = 0.8 * BODY_RADIUS;
    static const Real RGB_LED_UPPER_RING_OUTER_RADIUS = 1 * BODY_RADIUS; // to be checked
 
+
+   static const Real UV_LED_ELEVATION               = 0.04f;; //to be checked
+   static const Real UV_LED_HEIGHT                  = 0.002;                               // to be checked!
+   static const Real UV_LED_UPPER_RING_INNER_RADIUS = BODY_RADIUS;
+   static const Real UV_LED_UPPER_RING_OUTER_RADIUS = BODY_RADIUS + 0.01;
+
+
+
+
+
    /* Camera */
    static const Real CAMERA_ELEVATION            = BODY_HEIGHT+BODY_ELEVATION ;
    static const Real CAMERA_RADIUS               = 0.007;
@@ -57,9 +67,10 @@ namespace argos {
    CQTOpenGLEPuck::CQTOpenGLEPuck() :
       m_unVertices(40),
       m_fLEDAngleSlice(360.0f / 8.0f),
-      m_fRGBLEDAngleSlice(360.0f / 3.0f) {
-      LOG << m_fRGBLEDAngleSlice << std::endl;
-      LOG << m_fLEDAngleSlice << std::endl;
+      m_fRGBLEDAngleSlice(360.0f / 3.0f),
+      m_fUVLEDAngleSlice(360.0f / 30.0f){
+      // LOG << m_fRGBLEDAngleSlice << std::endl;
+      // LOG << m_fLEDAngleSlice << std::endl;
       /* Reserve the needed display lists */
       m_unLists = glGenLists(EPUCK_COMPONENTS_NUMBER);
 
@@ -70,6 +81,7 @@ namespace argos {
       m_unLEDList     = m_unLists + 3;
       m_unRGBLEDList  = m_unLists + 4;
       m_unCameraList  = m_unLists + 5;
+      m_unUVLEDList   = m_unLists + 6; //phormica
       /* Create the wheel display list */
       glNewList(m_unWheelList, GL_COMPILE);
       RenderWheel();
@@ -93,6 +105,11 @@ namespace argos {
       /* Create the RGB LED display list */
       glNewList(m_unRGBLEDList, GL_COMPILE);
       RenderRGBLED();
+      glEndList();
+
+      /* Create the UV LED display list */
+      glNewList(m_unUVLEDList, GL_COMPILE);
+      RenderUVLED();
       glEndList();
 
       /* Create the Camera display list */
@@ -147,6 +164,17 @@ namespace argos {
                         cColor.GetGreen(),
                         cColor.GetBlue());
          glCallList(m_unRGBLEDList);
+      }
+      /* Place the UV LEDs */
+      glPushMatrix();
+      glRotatef(m_fUVLEDAngleSlice, 0.0f, 0.0f, 1.0f);
+      for(UInt8 i = 11; i < 14; i++) {
+         const CColor& cColor = cLEDEquippedEntity.GetLED(i).GetColor();
+         glRotatef(-m_fUVLEDAngleSlice, 0.0f, 0.0f, 1.0f);
+         SetLEDMaterial(cColor.GetRed(),
+                        cColor.GetGreen(),
+                        cColor.GetBlue());
+         glCallList(m_unUVLEDList);
       }
       glPopMatrix();
       /* Place the camera */
@@ -457,7 +485,39 @@ namespace argos {
       glEnd();
    }
 
+   /*Render Phormica UV LEDs*/
 
+   void CQTOpenGLEPuck::RenderUVLED() {
+      /* Side surface */
+      CVector2 cVertex(UV_LED_UPPER_RING_OUTER_RADIUS, 0.0f);
+      CRadians cAngle(CRadians::TWO_PI / m_unVertices);
+      CVector2 cNormal(1.0f, 0.0f);
+      /* UV LEDs */
+      glBegin(GL_QUAD_STRIP);
+      for(GLuint i = 0; i <= m_unVertices / 3; i++) {
+         glNormal3f(cNormal.GetX(), cNormal.GetY(), 0.0f);
+         glVertex3f(cVertex.GetX(), cVertex.GetY(), UV_LED_ELEVATION + UV_LED_HEIGHT);
+         glVertex3f(cVertex.GetX(), cVertex.GetY(), UV_LED_ELEVATION);
+         cVertex.Rotate(cAngle);
+         cNormal.Rotate(cAngle);
+      }
+      glEnd();
+
+      /* Top surface  */
+      cVertex.Set(UV_LED_UPPER_RING_OUTER_RADIUS, 0.0f);
+      CVector2 cVertex2(UV_LED_UPPER_RING_INNER_RADIUS, 0.0f);
+
+      /* UV LEDs */
+      glBegin(GL_QUAD_STRIP);
+      glNormal3f(0.0f, 0.0f, 1.0f);
+      for(GLuint i = 0; i <= m_unVertices / 3; i++) {
+         glVertex3f(cVertex2.GetX(), cVertex2.GetY(), UV_LED_ELEVATION + UV_LED_HEIGHT);
+         glVertex3f(cVertex.GetX(), cVertex.GetY(), UV_LED_ELEVATION + UV_LED_HEIGHT);
+         cVertex.Rotate(cAngle);
+         cVertex2.Rotate(cAngle);
+      }
+      glEnd();
+   }
 
    void CQTOpenGLEPuck::RenderCamera() {
       /* Set material */

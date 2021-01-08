@@ -59,6 +59,8 @@ namespace argos {
       void RenderRGBLED();
       /** Renders the camera */
       void RenderCamera();
+      /** UV LEDs */
+      void RenderUVLED();
    private:
 
       /** Start of the display list index */
@@ -79,6 +81,9 @@ namespace argos {
       /** RGB LEDs display list */
       GLuint m_unRGBLEDList;
 
+      /** UV LEDs display list */
+      GLuint m_unUVLEDList;
+
       /** Foot-bot camera module */
       GLuint m_unCameraList;
 
@@ -91,6 +96,9 @@ namespace argos {
 
       /* Angle gap between two leds */
       GLfloat m_fRGBLEDAngleSlice;
+
+      /* Angle gap between two leds */
+      GLfloat m_fUVLEDAngleSlice;
 
    };
 

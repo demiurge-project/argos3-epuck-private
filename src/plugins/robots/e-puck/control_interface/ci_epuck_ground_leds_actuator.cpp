@@ -11,10 +11,11 @@ namespace argos {
    /****************************************/
    /****************************************/
 
-   CCI_EPuckGroundLEDsActuator::CCI_EPuckGroundLEDsActuator() {
+   CCI_EPuckGroundLEDsActuator::CCI_EPuckGroundLEDsActuator()
+   {
      m_unLEDSettingsD1ToD8 = 0;
      m_unLEDSettingsD9 = 0;
-     //m_unPWMGroundLED = 0;
+     m_unOnUVLEDs = 0;
    }
 
    /****************************************/
@@ -39,27 +40,9 @@ namespace argos {
    /****************************************/
    /****************************************/
 
-   void CCI_EPuckGroundLEDsActuator::SwitchLED(size_t un_led_number, bool b_switched_on) {
-     if(b_switched_on) {
-       if(un_led_number - 1 <= 7){
-        m_unLEDSettingsD1ToD8 |= (1 << (un_led_number-1));
-      }else if((un_led_number - 1) == 8){
-        m_unLEDSettingsD9 |= (1 << 0);
-      }
-     } else {
-       if(un_led_number - 1 <= 7){
-        m_unLEDSettingsD1ToD8 &= ~(1 << (un_led_number-1));
-      }else if((un_led_number - 1) == 8){
-        m_unLEDSettingsD9 &= ~(1 << 0);
-      }
-    }
-
-   }
-
-   /****************************************/
-   /****************************************/
-
    void CCI_EPuckGroundLEDsActuator::SwitchLEDs(size_t un_number_of_leds) {
+
+     m_unOnUVLEDs = un_number_of_leds;
 
      m_unLEDSettingsD1ToD8 = 0;
      m_unLEDSettingsD9 = 0;
@@ -127,20 +110,6 @@ namespace argos {
    /****************************************/
    /****************************************/
 
-   void CCI_EPuckGroundLEDsActuator::SwitchAll(bool b_switch_all) {
-
-      if(b_switch_all){
-        m_unLEDSettingsD1ToD8 = 255;
-        m_unLEDSettingsD9 = 255;
-      }else{
-        m_unLEDSettingsD1ToD8 = 0;
-        m_unLEDSettingsD9 = 0;
-      }
-   }
-
-   /****************************************/
-   /****************************************/
-
    UInt8 CCI_EPuckGroundLEDsActuator::GetD1ToD8(){
      return m_unLEDSettingsD1ToD8;
    }
@@ -153,18 +122,56 @@ namespace argos {
 
    }
 
-   // /****************************************/
-   // /****************************************/
-   //
-   // void CCI_EPuckGroundLEDsActuator::SetPWM(UInt8 un_PWM_Ground_LED){
-   //    m_unPWMGroundLED = un_PWM_Ground_LED;
-   // }
-   //
-   // /****************************************/
-   // /****************************************/
-   //
-   // UInt8 CCI_EPuckGroundLEDsActuator::GetPWM(){
-   //   return m_unPWMGroundLED;
-   // }
+   void CCI_EPuckGroundLEDsActuator::SwitchAll(bool b_switch_all) {
+
+      if(b_switch_all){
+        m_unLEDSettingsD1ToD8 = 255;
+        m_unLEDSettingsD9 = 255;
+      }else{
+        m_unLEDSettingsD1ToD8 = 0;
+        m_unLEDSettingsD9 = 0;
+      }
+   }
 
 }
+//
+//    // void CCI_EPuckGroundLEDsActuator::SetColor(size_t un_led_number,
+//    //                                               const CColor& c_color) {
+//    void CCI_EPuckGroundLEDsActuator::SetColor(size_t un_led_number, const CColor& c_color) {
+//       // m_tUVLEDSettings[un_led_number] = c_color;
+//       m_tUVLEDSettings[0] = CColor::RED;
+//
+//    }
+//
+//    /****************************************/
+//    /****************************************/
+//
+//    void CCI_EPuckGroundLEDsActuator::SetColors(const CColor& c_color) {
+//       SetColor(0, c_color);
+//       SetColor(1, c_color);
+//       SetColor(2, c_color);
+//
+//       // SetColor(0, CColor::BLUE);
+//       // SetColor(1, CColor::RED);
+//       // SetColor(2, CColor::BLUE);
+//    }
+//
+//    /****************************************/
+//    /****************************************/
+//
+//    void CCI_EPuckGroundLEDsActuator::SetColors(const TLEDSettings& t_colors) {
+//       SetColor(0, t_colors[0]);
+//       SetColor(1, t_colors[1]);
+//       SetColor(2, t_colors[2]);
+//
+//       // SetColor(0, CColor::GREEN);
+//       // SetColor(1, CColor::RED);
+//       //
+//       // SetColor(2, CColor::BLUE);
+//
+//    }
+//
+//    /****************************************/
+//    /****************************************/
+//
+// }
