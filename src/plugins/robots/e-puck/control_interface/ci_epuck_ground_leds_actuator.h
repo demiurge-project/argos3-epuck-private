@@ -68,25 +68,9 @@ namespace argos {
 
       UInt8 GetD9();
 
-      // /**
-      //  * Sets the color of a single LED.
-      //  * @param un_led_number The number of the LED [0-2]
-      //  * @param c_color The wanted color.
-      //  */
-      // virtual void SetColor(size_t un_led_number,
-      //                       const CColor& c_color);
-      //
-      // /**
-      //  * Sets the same color for all LEDs.
-      //  * @param c_color The wanted color.
-      //  */
-      // virtual void SetColors(const CColor& c_color);
-      //
-      // /**
-      //  * Sets the colors of all LEDs individually.
-      //  */
-      // virtual void SetColors(const TLEDSettings& c_colors);
+      virtual void SetOnUVLEDs(size_t un_On_UV_LEDs);
 
+      size_t GetOnUVLEDs();
 
 
    protected:
@@ -101,10 +85,6 @@ namespace argos {
       */
      UInt8 m_unLEDSettingsD9;
 
-     /**
-      * RGB LEDs settings for UV LEDs
-      */
-     // TLEDSettings m_tUVLEDSettings;
 
      /**
      * Number of UV LEDs on

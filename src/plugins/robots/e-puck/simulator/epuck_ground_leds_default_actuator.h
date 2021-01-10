@@ -28,6 +28,8 @@ namespace argos {
       virtual void Update();
       virtual void Reset();
 
+      size_t m_unUVLEDs;
+
       #ifdef ARGOS_WITH_LUA
                 /**
                  *

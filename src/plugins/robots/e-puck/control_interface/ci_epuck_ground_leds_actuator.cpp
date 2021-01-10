@@ -42,7 +42,7 @@ namespace argos {
 
    void CCI_EPuckGroundLEDsActuator::SwitchLEDs(size_t un_number_of_leds) {
 
-     m_unOnUVLEDs = un_number_of_leds;
+     SetOnUVLEDs(un_number_of_leds);
 
      m_unLEDSettingsD1ToD8 = 0;
      m_unLEDSettingsD9 = 0;
@@ -133,45 +133,13 @@ namespace argos {
       }
    }
 
+   void CCI_EPuckGroundLEDsActuator::SetOnUVLEDs(size_t un_On_UV_LEDs){
+       m_unOnUVLEDs = un_On_UV_LEDs;
+   }
+
+   size_t CCI_EPuckGroundLEDsActuator::GetOnUVLEDs(){
+       return m_unOnUVLEDs;
+   }
+
 }
-//
-//    // void CCI_EPuckGroundLEDsActuator::SetColor(size_t un_led_number,
-//    //                                               const CColor& c_color) {
-//    void CCI_EPuckGroundLEDsActuator::SetColor(size_t un_led_number, const CColor& c_color) {
-//       // m_tUVLEDSettings[un_led_number] = c_color;
-//       m_tUVLEDSettings[0] = CColor::RED;
-//
-//    }
-//
-//    /****************************************/
-//    /****************************************/
-//
-//    void CCI_EPuckGroundLEDsActuator::SetColors(const CColor& c_color) {
-//       SetColor(0, c_color);
-//       SetColor(1, c_color);
-//       SetColor(2, c_color);
-//
-//       // SetColor(0, CColor::BLUE);
-//       // SetColor(1, CColor::RED);
-//       // SetColor(2, CColor::BLUE);
-//    }
-//
-//    /****************************************/
-//    /****************************************/
-//
-//    void CCI_EPuckGroundLEDsActuator::SetColors(const TLEDSettings& t_colors) {
-//       SetColor(0, t_colors[0]);
-//       SetColor(1, t_colors[1]);
-//       SetColor(2, t_colors[2]);
-//
-//       // SetColor(0, CColor::GREEN);
-//       // SetColor(1, CColor::RED);
-//       //
-//       // SetColor(2, CColor::BLUE);
-//
-//    }
-//
-//    /****************************************/
-//    /****************************************/
-//
-// }
+

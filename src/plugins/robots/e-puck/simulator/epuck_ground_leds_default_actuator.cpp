@@ -15,7 +15,9 @@ namespace argos {
    /****************************************/
 
    CEPuckGroundLEDsDefaultActuator::CEPuckGroundLEDsDefaultActuator() :
-      m_pcLEDEquippedEntity(NULL) {
+      m_pcLEDEquippedEntity(NULL)
+   {
+       m_unUVLEDs = 0;
    }
 
    /****************************************/
@@ -56,18 +58,20 @@ namespace argos {
 
    void CEPuckGroundLEDsDefaultActuator::Update() {
 
-     if(m_unOnUVLEDs == 0){
+    m_unUVLEDs = CCI_EPuckGroundLEDsActuator::GetOnUVLEDs();
+
+       if(m_unUVLEDs == 0){
        m_pcLEDEquippedEntity->SetLEDColor(11,  CColor::BLACK);
        m_pcLEDEquippedEntity->SetLEDColor(12,  CColor::BLACK);
        m_pcLEDEquippedEntity->SetLEDColor(13,  CColor::BLACK);
 
      }
-     else if (m_unOnUVLEDs <= 3){
+     else if (m_unUVLEDs <= 3){
        m_pcLEDEquippedEntity->SetLEDColor(11,  CColor::BLACK);
        m_pcLEDEquippedEntity->SetLEDColor(12,  m_cUVColor);
        m_pcLEDEquippedEntity->SetLEDColor(13,  CColor::BLACK);
      }
-     else if ((m_unOnUVLEDs > 3) && (m_unOnUVLEDs <= 9)) {
+     else if ((m_unUVLEDs > 3) && (m_unUVLEDs <= 9)) {
 
       m_pcLEDEquippedEntity->SetLEDColor(11,  m_cUVColor);
       m_pcLEDEquippedEntity->SetLEDColor(12,  m_cUVColor);
