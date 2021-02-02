@@ -15,10 +15,9 @@ namespace argos {
    /****************************************/
 
    CEPuckGroundLEDsDefaultActuator::CEPuckGroundLEDsDefaultActuator() :
-      m_pcLEDEquippedEntity(NULL)
-   {
-       m_unUVLEDs = 0;
-   }
+      m_unUVLEDs(0),
+       m_pcLEDEquippedEntity(NULL)
+   {}
 
    /****************************************/
    /****************************************/
@@ -58,26 +57,33 @@ namespace argos {
 
    void CEPuckGroundLEDsDefaultActuator::Update() {
 
-    m_unUVLEDs = CCI_EPuckGroundLEDsActuator::GetOnUVLEDs();
+     UInt8 test  = GetD1ToD8();
 
-       if(m_unUVLEDs == 0){
-       m_pcLEDEquippedEntity->SetLEDColor(11,  CColor::BLACK);
-       m_pcLEDEquippedEntity->SetLEDColor(12,  CColor::BLACK);
-       m_pcLEDEquippedEntity->SetLEDColor(13,  CColor::BLACK);
 
-     }
-     else if (m_unUVLEDs <= 3){
-       m_pcLEDEquippedEntity->SetLEDColor(11,  CColor::BLACK);
-       m_pcLEDEquippedEntity->SetLEDColor(12,  m_cUVColor);
-       m_pcLEDEquippedEntity->SetLEDColor(13,  CColor::BLACK);
-     }
-     else if ((m_unUVLEDs > 3) && (m_unUVLEDs <= 9)) {
 
-      m_pcLEDEquippedEntity->SetLEDColor(11,  m_cUVColor);
-      m_pcLEDEquippedEntity->SetLEDColor(12,  m_cUVColor);
-      m_pcLEDEquippedEntity->SetLEDColor(13,  m_cUVColor);
-     }
-     // LOG<<m_pcLEDEquippedEntity->GetLED(11).GetColor()<<" color of leds in sim\n";
+      //m_unUVLEDs = CCI_EPuckGroundLEDsActuator::GetOnUVLEDs();
+
+    // if(m_unUVLEDs == 0){
+    if(test == 0){
+     m_pcLEDEquippedEntity->SetLEDColor(11,  CColor::BLACK);
+     m_pcLEDEquippedEntity->SetLEDColor(12,  CColor::BLACK);
+     m_pcLEDEquippedEntity->SetLEDColor(13,  CColor::BLACK);
+
+   }
+   //else if (m_unUVLEDs <= 3){
+   else if (test > 0 && test <= 7){
+     m_pcLEDEquippedEntity->SetLEDColor(11,  CColor::BLACK);
+     m_pcLEDEquippedEntity->SetLEDColor(12,  m_cUVColor);
+     m_pcLEDEquippedEntity->SetLEDColor(13,  CColor::BLACK);
+   }
+   //else if ((m_unUVLEDs > 3) && (m_unUVLEDs <= 9)) {
+   else if ((test > 7) && (m_unUVLEDs <= 255)) {
+    m_pcLEDEquippedEntity->SetLEDColor(11,  m_cUVColor);
+    m_pcLEDEquippedEntity->SetLEDColor(12,  m_cUVColor);
+    m_pcLEDEquippedEntity->SetLEDColor(13,  m_cUVColor);
+   }
+  // LOG<<m_pcLEDEquippedEntity->GetLED(11).GetColor()<<" color of leds in sim\n";
+
    }
 
    /****************************************/
